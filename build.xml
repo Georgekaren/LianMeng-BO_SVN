@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="package" name="LianMeng-BO">
+    <property environment="env"/>
+    <property name="ECServer_D.location" value="D:/Android_eclipse/kapai/android_changcheng/ECServer_D"/>
+    <property name="ECLIPSE_HOME" value="../../location/MyEclipse 10"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <path id="LianMeng-BO.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="${ECServer_D.location}/WebRoot/WEB-INF/lib/dom4j-2.0.0-ALPHA-2.jar"/>
+        <pathelement location="${ECServer_D.location}/WebRoot/WEB-INF/classes"/>
+        <pathelement location="${ECServer_D.location}/WebRoot/WEB-INF/lib/log4j-1.2.16.jar"/>
+        <pathelement location="${ECServer_D.location}/WebRoot/WEB-INF/lib/ant-1.7.0.jar"/>
+        <pathelement location="${ECServer_D.location}/WebRoot/WEB-INF/lib/ant-launcher-1.7.0.jar"/>
+        <pathelement location="${ECServer_D.location}/WebRoot/WEB-INF/lib/axiom-api-1.2.14.jar"/>
+        <pathelement location="${ECServer_D.location}/WebRoot/WEB-INF/lib/axiom-dom-1.2.14.jar"/>
+        <pathelement location="${ECServer_D.location}/WebRoot/WEB-INF/lib/axiom-impl-1.2.14.jar"/>
+        <pathelement location="${ECServer_D.location}/WebRoot/WEB-INF/lib/commons-lang.jar"/>
+        <pathelement location="${ECServer_D.location}/WebRoot/WEB-INF/lib/json_new.jar"/>
+        <pathelement location="${ECServer_D.location}/WebRoot/WEB-INF/lib/spring.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="LianMeng-BO.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+	<target name="package" depends="build">
+	        <jar duplicate="preserve"
+	            destfile="lib/lianmeng-bo-core-1.0.jar"
+	            basedir="bin"/>
+	    </target>
+</project>
